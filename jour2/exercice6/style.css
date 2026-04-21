@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: white;
+  transition: all 0.5s ease;
+}
+
+
+body.konami {
+  background: linear-gradient(135deg, #00AEEF, #1D1D1B);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+body.konami #content::before {
+  content: "Bienvenue à La Plateforme_";
+  display: block;
+  text-align: center;
+  font-size: 2em;
+  margin-top: 20%;
+}

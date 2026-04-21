@@ -1,15 +1,27 @@
-//Lorsqu’un utilisateur effectue un code konami, la page devient stylisée, aux couleurs de la plateforme. Le code konami est une séquence de touches : haut, haut, bas, bas, gauche, droite, gauche, droite, B, A.
-const konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
-let konamiIndex = 0;
-const body = document.body;
+const konamiCode = [
+  "ArrowUp", "ArrowUp",
+  "ArrowDown", "ArrowDown",
+  "ArrowLeft", "ArrowRight",
+  "ArrowLeft", "ArrowRight",
+  "b", "a"
+];
 
-document.addEventListener("keydown", function(event){
-    if (event.key === konamiCode[konamiIndex]) {
-        konamiIndex++;}
-        if (konamiIndex === konamiCode.length) {
-            body.style.backgroundColor = "#003cff";
-            body.style.color = "#ffffff";
-            konamiIndex = 0;
-        }
-    
+let input = [];
+
+document.addEventListener("keydown", (e) => {
+  input.push(e.key);
+
+  // Garder la longueur du tableau égale au code
+  if (input.length > konamiCode.length) {
+    input.shift();
+  }
+
+  // Vérifier si le code est correct
+  if (JSON.stringify(input) === JSON.stringify(konamiCode)) {
+    activateKonami();
+  }
 });
+
+function activateKonami() {
+  document.body.classList.add("konami");
+}
