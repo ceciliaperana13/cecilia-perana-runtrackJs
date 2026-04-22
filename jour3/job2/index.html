@@ -1,23 +1,42 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Arc en ciel</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/jour3/job2/style.css">
+    <!-- Jquery import -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <script src="script.js"></script>
+
 </head>
 <body>
-    <div id="container">
-      <button id="mélanger">show</button>
-      <img src="/jour3/image/arc1.png">
-      <img src="/jour3/image/arc2.png">
-      <img src="/jour3/image/arc3.png">
-      <img src="/jour3/image/arc4.png">
-      <img src="/jour3/image/arc5.png">
-      <img src="/jour3/image/arc6.png">
+    <button id="shuffle">Shuffle</button>
 
+
+    <div id="images-container">
+        <div class="rainbow" id="rainbow-1">
+            <img src="/jour3/image/arc1.png" class="picture">
+        </div>
+        <div class="rainbow" id="rainbow-2">
+            <img src="/jour3/image/arc2.png" class="picture">
+        </div>
+        <div class="rainbow" id="rainbow-3">
+            <img src="/jour3/image/arc3.png" class="picture">
+        </div>
+        <div class="rainbow" id="rainbow-4">
+            <img src="/jour3/image/arc4.png" class="picture">
+        </div>
+        <div class="rainbow" id="rainbow-5">
+            <img src="/jour3/image/arc5.png" class="picture">
+        </div>
+        <div class="rainbow" id="rainbow-6">
+            <img src="/jour3/image/arc6.png" class="picture">
+        </div>
     </div>
+    
+    <div id="puzzle-box"></div>
 
 
-<script src="script.js"></script>
 </body>
 </html>

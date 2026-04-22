@@ -1,14 +1,23 @@
-css
-#container {
-  display: flex;
+#images-container {
+    display : flex;
+
 }
 
-#container img {
-  width: 100px;
-  cursor: pointer;
+.rainbow {
+    padding : 2px;
+
 }
 
-#message {
-  margin-top: 20px;
-  font-weight: bold;
+.picture { 
+    height : 200px;
+    width : auto;
+
+}
+
+#puzzle-box { 
+
+    display : flex;
+    height : 202px;
+    width : 435px;
+    border-style : solid;
 }
