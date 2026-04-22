@@ -1,0 +1,6 @@
+#champ {
+  width: 200px;
+  padding: 10px;
+  font-size: 16px;
+  transition: none; /* on laisse jQuery gérer l'animation */
+}
