@@ -1,7 +1,10 @@
 document.getElementById("get-quote").addEventListener("click", getQuote);
 
 function getQuote() {
-    fetch("https://zenquotes.io/api/random")
+    const url = "https://zenquotes.io/api/random";
+    const proxy = "https://corsproxy.io/?";
+
+    fetch(proxy + encodeURIComponent(url))
         .then(response => response.json())
         .then(data => {
             const quote = data[0].q;
@@ -11,8 +14,8 @@ function getQuote() {
             document.getElementById("author").textContent = "- " + author;
         })
         .catch(error => {
-            document.getElementById("quote").textContent = "Erreur lors du chargement de la citation.";
+            document.getElementById("quote").textContent = "Erreur lors du chargement.";
             document.getElementById("author").textContent = "";
-            console.error(error);
+            console.error("Erreur API :", error);
         });
 }
