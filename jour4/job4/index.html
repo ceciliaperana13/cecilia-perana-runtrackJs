@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des utilisateurs</title>
+    <link rel="stylesheet" href="/jour4/job4/syle.css">
+</head>
+<body>
+
+    <h1>Gestion des utilisateurs</h1>
+
+    <!-- Bouton update -->
+    <button onclick="loadUsers()">Update</button>
+
+    <!-- Tableau -->
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- Formulaire -->
+    <h2>Ajouter un utilisateur</h2>
+    <form id="userForm">
+        <input type="text" id="nom" placeholder="Nom" required>
+        <input type="text" id="prenom" placeholder="Prénom" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <script src="/jour4/job4/scritp.js"defer></script>
+</body>
+</html>
