@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    text-align: center;
+    padding: 40px;
+}
+
+#quote-box {
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    width: 60%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#quote {
+    font-size: 1.4em;
+    font-style: italic;
+}
+
+#author {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #555;
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 1.1em;
+    border: none;
+    background: #0077ff;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #005fcc;
+}
