@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── Sécurités HTTP via balises meta ── -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self';
+             style-src  'self' https://fonts.googleapis.com;
+             font-src   https://fonts.gstatic.com;
+             script-src 'self';" />
+
+  <title>Inscription — Créer un compte</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Feuille de styles de la page -->
+  <link rel="stylesheet" href="/jour5/job/style_inscritption.css" />
+</head>
+<body>
+
+  <!-- ── Overlay de succès ────────────────────────────── -->
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-icon">🎉</div>
+    <h2>Compte créé !</h2>
+    <p>Bienvenue, vous pouvez maintenant vous connecter.</p>
+  </div>
+
+  <div class="wrapper">
+    <div class="card">
+
+      <!-- ── En-tête ────────────────────────────────────── -->
+      <div class="card-header">
+        <div class="step-indicator">
+          <div class="step-dot active" id="dot1"></div>
+          <div class="step-dot"        id="dot2"></div>
+          <div class="step-dot"        id="dot3"></div>
+        </div>
+        <span class="badge">✦ Nouveau compte</span>
+        <h1>Créer<br/>votre compte.</h1>
+        <p class="subtitle">Tous les champs marqués * sont obligatoires.</p>
+      </div>
+
+      <!-- ── Formulaire ──────────────────────────────────── -->
+      <form id="registerForm" novalidate autocomplete="off">
+
+        <!-- Honeypot anti-bot (invisible pour les humains) -->
+        <input
+          class="hp-field"
+          type="text"
+          name="website"
+          tabindex="-1"
+          aria-hidden="true"
+        />
+
+        
+        <input type="hidden" name="_csrf" id="csrfToken" />
+
+        <!-- ═══════════════════════════════════════════
+             SECTION 1 — IDENTITÉ
+        ═══════════════════════════════════════════ -->
+        <div class="section-title"> Identité</div>
+
+        <div class="row">
+          <!-- Prénom -->
+          <div class="field" id="field-prenom">
+            <label for="prenom" class="required-dot">Prénom</label>
+            <div class="input-wrap">
+              <span class="input-icon"></span>
+              <input
+                type="text"
+                id="prenom"
+                name="prenom"
+                placeholder="Marie"
+                maxlength="60"
+                autocomplete="given-name"
+                inputmode="text"
+                spellcheck="false"
+                autocapitalize="words"
+                required
+              />
+              <span class="status-icon" id="status-prenom"></span>
+            </div>
+            <div class="field-error" id="error-prenom" role="alert" aria-live="polite"></div>
+          </div>
+
+          <!-- Nom -->
+          <div class="field" id="field-nom">
+            <label for="nom" class="required-dot">Nom</label>
+            <div class="input-wrap">
+              <span class="input-icon"></span>
+              <input
+                type="text"
+                id="nom"
+                name="nom"
+                placeholder="Dupont"
+                maxlength="60"
+                autocomplete="family-name"
+                spellcheck="false"
+                autocapitalize="words"
+                required
+              />
+              <span class="status-icon" id="status-nom"></span>
+            </div>
+            <div class="field-error" id="error-nom" role="alert" aria-live="polite"></div>
+          </div>
+        </div><!-- /.row -->
+
+        <!-- ═══════════════════════════════════════════
+             SECTION 2 — CONTACT
+        ═══════════════════════════════════════════ -->
+        <div class="section-title"> Contact</div>
+
+        <!-- Email -->
+        <div class="field" id="field-email">
+          <label for="email" class="required-dot">Adresse e-mail</label>
+          <div class="input-wrap">
+            <span class="input-icon"></span>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="marie.dupont@exemple.fr"
+              maxlength="254"
+              autocomplete="email"
+              inputmode="email"
+              spellcheck="false"
+              autocapitalize="off"
+              required
+            />
+            <span class="status-icon" id="status-email"></span>
+          </div>
+          <div class="field-error" id="error-email" role="alert" aria-live="polite"></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════
+             SECTION 3 — SÉCURITÉ (Mots de passe)
+        ═══════════════════════════════════════════ -->
+        <div class="section-title">🔑 Sécurité</div>
+
+        <!-- Mot de passe -->
+        <div class="field" id="field-password">
+          <label for="password" class="required-dot">Mot de passe</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Min. 8 car., maj., chiffre, symbole"
+              maxlength="128"
+              autocomplete="new-password"
+              required
+            />
+            <button
+              type="button"
+              class="toggle-pw"
+              id="togglePw1"
+              aria-label="Afficher le mot de passe"
+            >👁</button>
+          </div>
+
+          <!-- Barre de force -->
+          <div class="strength-wrap" id="strengthWrap">
+            <div class="strength-bar">
+              <div class="seg" id="seg1"></div>
+              <div class="seg" id="seg2"></div>
+              <div class="seg" id="seg3"></div>
+              <div class="seg" id="seg4"></div>
+            </div>
+            <span class="strength-label" id="strengthLabel"></span>
+          </div>
+
+          <div class="field-error" id="error-password" role="alert" aria-live="polite"></div>
+        </div>
+
+        <!-- Confirmation du mot de passe -->
+        <div class="field" id="field-confirm">
+          <label for="confirm" class="required-dot">Confirmer le mot de passe</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input
+              type="password"
+              id="confirm"
+              name="confirm"
+              placeholder="Répétez votre mot de passe"
+              maxlength="128"
+              autocomplete="new-password"
+              required
+            />
+            <button
+              type="button"
+              class="toggle-pw"
+              id="togglePw2"
+              aria-label="Afficher la confirmation"
+            >👁</button>
+          </div>
+          <div class="match-indicator" id="matchIndicator"></div>
+          <div class="field-error" id="error-confirm" role="alert" aria-live="polite"></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════
+             SECTION 4 — ADRESSE
+        ═══════════════════════════════════════════ -->
+        <div class="section-title">📍 Adresse</div>
+
+        <!-- Adresse -->
+        <div class="field" id="field-adresse">
+          <label for="adresse" class="required-dot">Adresse</label>
+          <div class="input-wrap">
+            <span class="input-icon"></span>
+            <input
+              type="text"
+              id="adresse"
+              name="adresse"
+              placeholder="12 rue de la Paix"
+              maxlength="150"
+              autocomplete="street-address"
+              spellcheck="false"
+              required
+            />
+            <span class="status-icon" id="status-adresse"></span>
+          </div>
+          <div class="field-error" id="error-adresse" role="alert" aria-live="polite"></div>
+        </div>
+
+        <!-- Code postal + Ville -->
+        <div class="address-row">
+          <!-- Code postal -->
+          <div class="field" id="field-cp">
+            <label for="cp" class="required-dot">Code postal</label>
+            <div class="input-wrap">
+              <input
+                type="text"
+                id="cp"
+                name="cp"
+                placeholder="75001"
+                maxlength="5"
+                inputmode="numeric"
+                autocomplete="postal-code"
+                pattern="[0-9]{5}"
+                required
+                style="padding-left: 0.85rem;"
+              />
+              <span class="status-icon" id="status-cp"></span>
+            </div>
+            <div class="field-error" id="error-cp" role="alert" aria-live="polite"></div>
+          </div>
+
+          <!-- Ville -->
+          <div class="field" id="field-ville">
+            <label for="ville">Ville</label>
+            <div class="input-wrap">
+              <span class="input-icon">🏙</span>
+              <input
+                type="text"
+                id="ville"
+                name="ville"
+                placeholder="Paris"
+                maxlength="80"
+                autocomplete="address-level2"
+                autocapitalize="words"
+                spellcheck="false"
+              />
+              <span class="status-icon" id="status-ville"></span>
+            </div>
+            <div class="field-error" id="error-ville" role="alert" aria-live="polite"></div>
+          </div>
+        </div><!-- /.address-row -->
+
+        <!-- ── A revoir ─────────────────────────── -->
+        <label class="privacy-box" for="rgpd">
+          <input type="checkbox" id="rgpd" name="rgpd" />
+          <span class="privacy-text">
+            J'accepte les <a href="#" onclick="return false">Conditions d'utilisation</a>
+            et la <a href="#" onclick="return false">Politique de confidentialité</a>.
+            Mes données sont traitées conformément au RGPD.
+          </span>
+        </label>
+        <div class="privacy-error" id="error-rgpd">
+          ⚠ Vous devez accepter les conditions pour continuer.
+        </div>
+
+        <!-- Bouton de soumission -->
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <span class="btn-text">Créer mon compte →</span>
+          <span class="spinner"></span>
+        </button>
+
+      </form><!-- /#registerForm -->
+
+      <p class="login-link">
+        Déjà un compte ? <a href="/jour5/job/connexion.html">Se connecter</a>
+      </p>
+
+    </div><!-- /.card -->
+  </div><!-- /.wrapper -->
+
+  <!-- Script de la page (chargé en fin de body) -->
+  <script src="/jour5/job/scriptinscription.js"></script>
+
+</body>
+</html>

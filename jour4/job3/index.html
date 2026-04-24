@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Filtrer Pokédex</title>
+</head>
+<body>
+
+<h2>Filtrer les Pokémon</h2>
+
+<form>
+    <label>ID :</label>
+    <input type="text" id="id"><br><br>
+
+    <label>Nom :</label>
+    <input type="text" id="nom"><br><br>
+
+    <label>Type :</label>
+    <select id="type">
+        <option value="">-- Tous --</option>
+        <option value="Fire">Feu</option>
+        <option value="Water">Eau</option>
+        <option value="Grass">Plante</option>
+        <option value="Electric">Électrique</option>
+        <option value="Poison">Poison</option>
+        <option value="Flying">Vol</option>
+        <option value="Bug">Insecte</option>
+        <option value="Normal">Normal</option>
+    </select><br><br>
+
+    <input type="button" value="Filtrer" id="filtrerBtn">
+</form>
+
+<h3>Résultats :</h3>
+<div id="resultats"></div>
+
+<script src="/jour4/job3/script.js"></script>
+
+</body>
+</html>
