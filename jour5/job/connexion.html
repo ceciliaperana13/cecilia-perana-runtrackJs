@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── Sécurités HTTP via balises meta ── -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self';
+             style-src  'self' https://fonts.googleapis.com;
+             font-src   https://fonts.gstatic.com;
+             script-src 'self';" />
+
+  <title>Connexion — Accès Sécurisé</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Feuille de styles de la page -->
+  <link rel="stylesheet" href="/jour5/job/styleconnexion.css" />
+</head>
+<body>
+
+  <div class="card">
+
+    <!-- ── En-tête ──────────────────────────────────── -->
+    <div class="card-header">
+      <span class="badge">Espace sécurisé</span>
+      <h1>Bon retour<br/>parmi nous.</h1>
+      <p class="subtitle">Connectez-vous à votre compte pour continuer.</p>
+    </div>
+
+    <!-- Alerte globale (rate-limit, erreur serveur…) -->
+    <div class="alert error" id="globalAlert" role="alert" aria-live="polite"></div>
+
+    <!-- ── Formulaire ───────────────────────────────── -->
+    <form id="loginForm" novalidate autocomplete="off">
+
+      <!-- Honeypot anti-bot (invisible pour les humains) -->
+      <input
+        class="hp-field"
+        type="text"
+        name="website"
+        tabindex="-1"
+        aria-hidden="true"
+      />
+
+      <!-- CSRF token (valeur injectée par connexion.js ; en prod : côté serveur) -->
+      <input type="hidden" name="_csrf" id="csrfToken" />
+
+      <!-- ── Champ Email ─────────────────────────── -->
+      <div class="field" id="field-email">
+        <label for="email">Adresse e-mail</label>
+        <div class="input-wrap">
+          <span class="input-icon">✉</span>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="vous@exemple.fr"
+            maxlength="254"
+            autocomplete="username"
+            inputmode="email"
+            spellcheck="false"
+            autocapitalize="off"
+            required
+          />
+          <span class="status-icon" id="status-email"></span>
+        </div>
+        <div class="field-error" id="error-email" role="alert" aria-live="polite"></div>
+      </div>
+
+      <!-- ── Champ Mot de passe ──────────────────── -->
+      <div class="field" id="field-password">
+        <label for="password">Mot de passe</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔑</span>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="••••••••"
+            maxlength="128"
+            autocomplete="current-password"
+            required
+          />
+          <button
+            type="button"
+            class="toggle-pw"
+            id="togglePw"
+            aria-label="Afficher / masquer le mot de passe"
+          >👁</button>
+        </div>
+        <div class="field-error" id="error-password" role="alert" aria-live="polite"></div>
+      </div>
+
+      <!-- Lien mot de passe oublié -->
+      <div class="forgot">
+        <a href="#">Mot de passe oublié ?</a>
+      </div>
+
+      <!-- Note de sécurité -->
+      <div class="security-note">
+        🛡️ Connexion chiffrée – vos données ne sont jamais transmises en clair.
+      </div>
+
+      <!-- Bouton de soumission -->
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <span class="btn-text">Se connecter</span>
+        <span class="spinner"></span>
+      </button>
+
+    </form>
+
+    <div class="divider">ou</div>
+
+    <p class="register-link">
+      Pas encore de compte ?
+      <a href="/jour5/job/inscritption.html">Créer un compte</a>
+    </p>
+
+  </div><!-- /.card -->
+
+  <!-- Script de la page (chargé en fin de body) -->
+  <script src="/jour5/job/scritptconnexion.js"></script>
+
+</body>
+</html>
